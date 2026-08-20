@@ -1,27 +1,168 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Husein App</title>
-  <link rel="icon" href="icon.png" type="image/png">
-  <link rel="apple-touch-icon" href="icon.png">
-  <meta name="theme-color" content="#1f4e79">
-  <link rel="manifest" href="manifest.json">
-  <style> 
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; color: #222; text-align: center; } 
-    header { background: #1f4e79; color: white; padding: 40px 15px; }
-    h1 { margin: 0; font-size: 50px; }
-    .btn { display: inline-block; margin: 20px; padding: 12px 25px; background: #1f4e79; color: white; text-decoration: none; border-radius: 8px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2 Potter</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #222;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.number {
+    font-size: 18px;
+    color: #777;
+    font-weight: bold;
+}
+
+.word {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.sentence {
+    font-size: 19px;
+    margin: 10px 0;
+}
+
+.translation {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background: #222;
+    color: white;
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <img src="icon.png" width="120" style="border-radius: 20px;">
-    <h1>Husein App</h1>
-    <p>التطبيق الرسمي</p>
-  </header>
-  <p style="padding: 20px; font-size: 18px;">اهلا فيك بتطبيق Husein App</p>
-  <a href="#" class="btn">الصفحة الرئيسية</a>
+
+<h1>📚 B2 Potter</h1>
+
+<div id="words"></div>
+
+<script>
+
+const words = [
+
+{
+word: "beispielsweise",
+sentence: "Beispielsweise kann man mit dieser Methode viel Zeit sparen.",
+translation: "على سبيل المثال، يمكن توفير الكثير من الوقت بهذه الطريقة."
+},
+
+{
+word: "allerdings",
+sentence: "Das Angebot ist interessant, allerdings ist es ziemlich teuer.",
+translation: "العرض مثير للاهتمام، لكنه غالي الثمن نوعًا ما."
+},
+
+{
+word: "Voraussetzung",
+sentence: "Eine gute Vorbereitung ist eine wichtige Voraussetzung für den Erfolg.",
+translation: "التحضير الجيد شرط مهم للنجاح."
+},
+
+{
+word: "berücksichtigen",
+sentence: "Wir müssen auch die Kosten berücksichtigen.",
+translation: "يجب علينا أيضًا أن نأخذ التكاليف بعين الاعتبار."
+},
+
+{
+word: "vermeiden",
+sentence: "Wir sollten unnötige Fehler vermeiden.",
+translation: "يجب علينا تجنب الأخطاء غير الضرورية."
+},
+
+{
+word: "sich entscheiden",
+sentence: "Ich habe mich für diesen Kurs entschieden.",
+translation: "لقد قررت اختيار هذه الدورة."
+},
+
+{
+word: "Auswirkung",
+sentence: "Diese Entscheidung kann große Auswirkungen haben.",
+translation: "يمكن أن يكون لهذا القرار تأثيرات كبيرة."
+},
+
+{
+word: "zuverlässig",
+sentence: "Er ist ein sehr zuverlässiger Mitarbeiter.",
+translation: "إنه موظف موثوق به جدًا."
+},
+
+{
+word: "erforderlich",
+sentence: "Für diese Arbeit sind gute Deutschkenntnisse erforderlich.",
+translation: "لهذا العمل، تعتبر المعرفة الجيدة باللغة الألمانية ضرورية."
+},
+
+{
+word: "sich bemühen",
+sentence: "Ich bemühe mich, jeden Tag Deutsch zu lernen.",
+translation: "أبذل جهدي لتعلم الألمانية كل يوم."
+}
+
+];
+
+const container = document.getElementById("words");
+
+words.forEach((item, index) => {
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+        <div class="number">${index + 1}</div>
+        <div class="word">${item.word}</div>
+        <div class="sentence">${item.sentence}</div>
+        <div class="translation">${item.translation}</div>
+
+        <button onclick="speak('${item.sentence.replace(/'/g, "\\'")}')">
+            🔊 اسمع الجملة
+        </button>
+    `;
+
+    container.appendChild(card);
+});
+
+function speak(text) {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "de-DE";
+    speech.rate = 0.85;
+    speech.pitch = 1;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(speech);
+}
+
+</script>
+
 </body>
 </html>
