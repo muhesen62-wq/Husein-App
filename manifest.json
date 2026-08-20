@@ -1,0 +1,15 @@
+{
+  "name": "Husein App",
+  "short_name": "Husein",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1f4e79",
+  "theme_color": "#1f4e79",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
