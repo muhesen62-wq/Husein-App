@@ -8,9 +8,10 @@
 body { font-family: Arial; margin: 0; background: #f5f5f5; }
 header { background: #1f4e79; color: white; padding: 25px; text-align: center; }
 .card { background: white; padding: 20px; margin: 15px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
-h3 { color: #1f4e79; background: #e8f0fe; padding: 10px; border-radius: 8px; }
+h3 { color: #1f4e79; background: #e8f0fe; padding: 10px; border-radius: 8px; margin-top: 20px; }
 .word { font-weight: bold; color: #1f4e79; margin-top: 12px; font-size: 18px; }
-.trans { margin: 5px 0 15px 0; font-size: 16px; }
+.trans { margin: 5px 0 10px 0; font-size: 16px; }
+.satz { font-style: italic; color: #333; margin-top: 8px; }
 button { background: #1f4e79; color: white; border: none; padding: 12px 18px; border-radius: 10px; margin: 15px; font-size: 16px; }
 </style>
 </head>
@@ -26,26 +27,61 @@ button { background: #1f4e79; color: white; border: none; padding: 12px 18px; bo
     <h2>📖 Seite 28</h2>
     <p>Wichtige Wörter - Beruf</p>
   </div>
+  <div class="card" onclick="document.getElementById('home').style.display='none'; document.getElementById('p29').style.display='block';">
+    <h2>📖 Seite 29</h2>
+    <p>Vorstellungsgespräch & Vertrag</p>
+  </div>
 </div>
 
 <div id="p28" style="display: none;">
   <button onclick="document.getElementById('home').style.display='block'; document.getElementById('p28').style.display='none';">← رجوع</button>
   <div class="card">
     <h2>Seite 28: Wichtige Wörter</h2>
-    
     <h3>A Berufliche Einstiege</h3>
     <p class="word">der Absolvent, -en</p><p class="trans">= الخريج</p>
-    <p class="word">die Absolventin, -nen</p><p class="trans">= الخريجة</p>
     <p class="word">die Globalisierung</p><p class="trans">= العولمة</p>
     <p class="word">das Unternehmen</p><p class="trans">= الشركة</p>
     <p class="word">die Herausforderung</p><p class="trans">= التحدي</p>
-
     <h3>B Bei der Berufsberatung</h3>
     <p class="word">ambulant</p><p class="trans">= متنقل</p>
-
+    <p class="word">die Qualifikation</p><p class="trans">= المؤهل</p>
     <h3>C Eine Unternehmensbesichtigung</h3>
     <p class="word">die Fachkraft</p><p class="trans">= الموظف المختص</p>
     <p class="word">die Pflegekraft</p><p class="trans">= ممرض/ممرضة</p>
+  </div>
+</div>
+
+<div id="p29" style="display: none;">
+  <button onclick="document.getElementById('home').style.display='block'; document.getElementById('p29').style.display='none';">← رجوع</button>
+  <div class="card">
+    <h2>Seite 29: Wichtige Wörter + Sätze</h2>
+    
+    <h3>D Im Vorstellungsgespräch</h3>
+    <p class="word">der Lebenslauf, -e</p>
+    <p class="trans">= السيرة الذاتية</p>
+    <p class="satz">Ich habe meinen Lebenslauf mitgebracht.</p>
+    <p class="trans">= لقد احضرت سيرتي الذاتية معي</p>
+
+    <p class="word">das Vorstellungsgespräch, -e</p>
+    <p class="trans">= المقابلة الشخصية</p>
+    <p class="satz">Wann ist das Vorstellungsgespräch?</p>
+    <p class="trans">= متى المقابلة الشخصية؟</p>
+
+    <p class="word">die Erfahrung, -en</p>
+    <p class="trans">= الخبرة</p>
+    <p class="satz">Ich habe zwei Jahre Erfahrung.</p>
+    <p class="trans">= لدي سنتين خبرة</p>
+
+    <h3>E Arbeitsvertrag und Rechte</h3>
+    <p class="word">der Arbeitsvertrag, -e</p>
+    <p class="trans">= عقد العمل</p>
+    <p class="satz">Hier ist Ihr Arbeitsvertrag.</p>
+    <p class="trans">= هذا هو عقد العمل الخاص بك</p>
+
+    <p class="word">das Gehalt, -er</p>
+    <p class="trans">= الراتب</p>
+    <p class="satz">Wie hoch ist das Gehalt?</p>
+    <p class="trans">= كم الراتب؟</p>
   </div>
 </div>
 
