@@ -1,278 +1,144 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B2 Potter – Deutsch lernen</title>
-
+<title>B2 - صفحتين</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f4f7;
-    margin: 0;
-    padding: 20px;
-    direction: ltr;
-}
-
-h1 {
-    text-align: center;
-    color: #222;
-}
-
-.subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 25px;
-}
-
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 18px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-}
-
-.number {
-    color: #777;
-    font-size: 14px;
-}
-
-.word {
-    font-size: 25px;
-    font-weight: bold;
-    color: #111;
-    margin: 8px 0;
-}
-
-.arabic {
-    font-size: 20px;
-    color: #0077cc;
-    margin-bottom: 12px;
-}
-
-.example {
-    font-size: 18px;
-    margin: 8px 0;
-}
-
-.translation {
-    font-size: 17px;
-    color: #555;
-    margin-bottom: 12px;
-}
-
-button {
-    background: #222;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:active {
-    transform: scale(0.97);
-}
+body{font-family:sans-serif;background:#f2f2f7;margin:0;padding:12px}
+h1{text-align:center}
+.search{width:100%;padding:14px;border-radius:14px;border:1px solid #ddd;margin:12px 0;box-sizing:border-box;font-size:16px}
+.card{background:#fff;border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.num{color:#999;font-size:11px}.word{font-size:18px;font-weight:800;margin:6px 0;direction:ltr;text-align:left}
+.trans{color:#007aff;font-weight:700}
+.de{font-size:14px;direction:ltr;text-align:left;margin-top:8px}
+.ar{font-size:13px;color:#555;margin-top:4px}
+.btn{margin-top:10px;background:#111;color:#fff;border:0;padding:8px 14px;border-radius:20px;cursor:pointer}
 </style>
 </head>
-
 <body>
-
-<h1>🇩🇪 B2 Potter</h1>
-<div class="subtitle">Deutsch lernen – Wörter, Sätze & Übersetzung</div>
-
-<div class="card">
-    <div class="number">1</div>
-    <div class="word">der Berufseinstieg</div>
-    <div class="arabic">بداية الدخول إلى الحياة المهنية</div>
-
-    <div class="example">
-        Mein Berufseinstieg war nicht einfach.
-    </div>
-
-    <div class="translation">
-        لم تكن بدايتي في الحياة المهنية سهلة.
-    </div>
-
-    <button onclick="speak('Mein Berufseinstieg war nicht einfach.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">2</div>
-    <div class="word">die Ausbildung</div>
-    <div class="arabic">التدريب المهني</div>
-
-    <div class="example">
-        Ich mache eine Ausbildung zum Elektriker.
-    </div>
-
-    <div class="translation">
-        أقوم بتدريب مهني لأصبح كهربائيًا.
-    </div>
-
-    <button onclick="speak('Ich mache eine Ausbildung zum Elektriker.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">3</div>
-    <div class="word">die Berufserfahrung</div>
-    <div class="arabic">الخبرة المهنية</div>
-
-    <div class="example">
-        Ich habe bereits mehrere Jahre Berufserfahrung.
-    </div>
-
-    <div class="translation">
-        لدي بالفعل عدة سنوات من الخبرة المهنية.
-    </div>
-
-    <button onclick="speak('Ich habe bereits mehrere Jahre Berufserfahrung.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">4</div>
-    <div class="word">sich bewerben</div>
-    <div class="arabic">يتقدّم بطلب للعمل</div>
-
-    <div class="example">
-        Ich möchte mich bei dieser Firma bewerben.
-    </div>
-
-    <div class="translation">
-        أريد أن أتقدم بطلب للعمل في هذه الشركة.
-    </div>
-
-    <button onclick="speak('Ich möchte mich bei dieser Firma bewerben.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">5</div>
-    <div class="word">die Stelle</div>
-    <div class="arabic">وظيفة / منصب عمل</div>
-
-    <div class="example">
-        Ich habe eine neue Stelle gefunden.
-    </div>
-
-    <div class="translation">
-        وجدت وظيفة جديدة.
-    </div>
-
-    <button onclick="speak('Ich habe eine neue Stelle gefunden.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">6</div>
-    <div class="word">die Voraussetzung</div>
-    <div class="arabic">الشرط / المتطلب</div>
-
-    <div class="example">
-        Gute Deutschkenntnisse sind eine wichtige Voraussetzung.
-    </div>
-
-    <div class="translation">
-        معرفة اللغة الألمانية الجيدة شرط مهم.
-    </div>
-
-    <button onclick="speak('Gute Deutschkenntnisse sind eine wichtige Voraussetzung.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">7</div>
-    <div class="word">die Qualifikation</div>
-    <div class="arabic">المؤهل / الكفاءة</div>
-
-    <div class="example">
-        Für diese Stelle braucht man bestimmte Qualifikationen.
-    </div>
-
-    <div class="translation">
-        لهذه الوظيفة يحتاج الشخص إلى مؤهلات معينة.
-    </div>
-
-    <button onclick="speak('Für diese Stelle braucht man bestimmte Qualifikationen.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">8</div>
-    <div class="word">der Lebenslauf</div>
-    <div class="arabic">السيرة الذاتية</div>
-
-    <div class="example">
-        Ich habe meinen Lebenslauf aktualisiert.
-    </div>
-
-    <div class="translation">
-        لقد حدّثت سيرتي الذاتية.
-    </div>
-
-    <button onclick="speak('Ich habe meinen Lebenslauf aktualisiert.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">9</div>
-    <div class="word">das Vorstellungsgespräch</div>
-    <div class="arabic">مقابلة العمل</div>
-
-    <div class="example">
-        Morgen habe ich ein Vorstellungsgespräch.
-    </div>
-
-    <div class="translation">
-        لدي غدًا مقابلة عمل.
-    </div>
-
-    <button onclick="speak('Morgen habe ich ein Vorstellungsgespräch.')">
-        🔊 صوت
-    </button>
-</div>
-
-<div class="card">
-    <div class="number">10</div>
-    <div class="word">die Bewerbung</div>
-    <div class="arabic">طلب التوظيف</div>
-
-    <div class="example">
-        Ich habe meine Bewerbung gestern abgeschickt.
-    </div>
-
-    <div class="translation">
-        أرسلت طلب التوظيف الخاص بي أمس.
-    </div>
-
-    <button onclick="speak('Ich habe meine Bewerbung gestern abgeschickt.')">
-        🔊 صوت
-    </button>
-</div>
-
+<h1>📚 101 كلمة - الصفحتين</h1>
+<input id="q" class="search" placeholder="ابحث..." oninput="render()">
+<div id="list"></div>
 <script>
-function speak(text) {
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "de-DE";
-    speech.rate = 0.85;
-    speech.pitch = 1;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
+const DATA=[
+{w:"der Absolvent, -en",t:"الخريج",d:"Der Absolvent, -en ist wichtig im Beruf.",a:"الخريج"},
+{w:"die Absolventin, -nen",t:"الخريجة",d:"Die Absolventin, -nen ist wichtig im Beruf.",a:"الخريجة"},
+{w:"sich anpassen an (+ Akk.)",t:"يتأقلم مع",d:"Man muss sich anpassen an.",a:"يتأقلم مع"},
+{w:"der Arbeitsberater, -",t:"مستشار العمل",d:"Der Arbeitsberater hilft Ihnen.",a:"مستشار العمل"},
+{w:"die Arbeitsberaterin, -nen",t:"مستشارة العمل",d:"Die Arbeitsberaterin berät Sie.",a:"مستشارة العمل"},
+{w:"die Arbeitsleistung (Sg.)",t:"أداء العمل",d:"Die Arbeitsleistung ist sehr gut.",a:"أداء العمل"},
+{w:"die Arbeitswelt (Sg.)",t:"عالم العمل",d:"Die Arbeitswelt verändert sich.",a:"عالم العمل"},
+{w:"aufgrund von (+ Dat.)",t:"بسبب",d:"Aufgrund von Problemen gibt es eine Änderung.",a:"بسبب"},
+{w:"die Bedeutung, -en",t:"الأهمية",d:"Die Bedeutung ist groß.",a:"الأهمية"},
+{w:"sich behaupten",t:"يثبت نفسه",d:"Man muss sich behaupten.",a:"يثبت نفسه"},
+{w:"der Berufsweg, -e",t:"المسار المهني",d:"Der Berufsweg ist interessant.",a:"المسار المهني"},
+{w:"die Digitalisierung (Sg.)",t:"الرقمنة",d:"Die Digitalisierung verändert alles.",a:"الرقمنة"},
+{w:"sich einstellen auf (+ Akk.)",t:"يتكيف مع / يستعد",d:"Wir müssen uns einstellen auf neue Aufgaben.",a:"يتكيف مع / يستعد"},
+{w:"erforderlich",t:"ضروري / مطلوب",d:"Das ist erforderlich.",a:"ضروري / مطلوب"},
+{w:"etw. erwerben",t:"يكتسب شيء",d:"Er wirbt neue Kenntnisse.",a:"يكتسب شيء"},
+{w:"der Erwerbstätige, -n",t:"الشخص العامل",d:"Der Erwerbstätige arbeitet viel.",a:"الشخص العامل"},
+{w:"die Erwerbstätige, -n",t:"المرأة العاملة",d:"Die Erwerbstätige arbeitet viel.",a:"المرأة العاملة"},
+{w:"der Freiberufler, -",t:"صاحب مهنة حرة",d:"Er ist Freiberufler.",a:"صاحب مهنة حرة"},
+{w:"die Freiberuflerin, -nen",t:"صاحبة مهنة حرة",d:"Sie ist Freiberuflerin.",a:"صاحبة مهنة حرة"},
+{w:"die Globalisierung (Sg.)",t:"العولمة",d:"Die Globalisierung beeinflusst uns.",a:"العولمة"},
+{w:"die Herausforderung, -en",t:"التحدي",d:"Das ist eine Herausforderung.",a:"التحدي"},
+{w:"interkulturelle Kompetenz",t:"الكفاءة بين الثقافات",d:"Interkulturelle Kompetenz ist wichtig.",a:"الكفاءة بين الثقافات"},
+{w:"der Klimawandel (Sg.)",t:"تغير المناخ",d:"Der Klimawandel ist ein Thema.",a:"تغير المناخ"},
+{w:"die Kompetenz, -en",t:"الكفاءة",d:"Er hat große Kompetenz.",a:"الكفاءة"},
+{w:"modernisieren",t:"يحدث / يعصرن",d:"Wir modernisieren die Firma.",a:"يحدث / يعصرن"},
+{w:"die Neuorientierung, -en",t:"إعادة التوجيه",d:"Eine Neuorientierung ist nötig.",a:"إعادة التوجيه"},
+{w:"sich niederlassen",t:"يستقر / يؤسس",d:"Sie will sich niederlassen.",a:"يستقر / يؤسس"},
+{w:"ökologisch",t:"بيئي",d:"Wir handeln ökologisch.",a:"بيئي"},
+{w:"das Pausengespräch, -e",t:"حديث الاستراحة",d:"Das Pausengespräch war nett.",a:"حديث الاستراحة"},
+{w:"die Technologie, -n",t:"التكنولوجيا",d:"Die Technologie ist modern.",a:"التكنولوجيا"},
+{w:"die Unterbrechung, -en",t:"الانقطاع",d:"Es gab eine Unterbrechung.",a:"الانقطاع"},
+{w:"das Unternehmen, -",t:"الشركة",d:"Das Unternehmen ist groß.",a:"الشركة"},
+{w:"veraltet",t:"قديم / عفا عليه الزمن",d:"Das ist veraltet.",a:"قديم / عفا عليه الزمن"},
+{w:"vertrauen auf (+ Akk.)",t:"يثق بـ",d:"Ich vertraue auf dich.",a:"يثق بـ"},
+{w:"ambulant",t:"متنقل",d:"Die Pflege ist ambulant.",a:"متنقل"},
+{w:"das Berufsleben (Sg.)",t:"الحياة المهنية",d:"Das Berufsleben ist wichtig.",a:"الحياة المهنية"},
+{w:"das Beschwerdemanagement (Sg.)",t:"إدارة الشكاوى",d:"Das Beschwerdemanagement hilft.",a:"إدارة الشكاوى"},
+{w:"die Filiale, -n",t:"الفرع",d:"Die Filiale ist neu.",a:"الفرع"},
+{w:"eine flache Hierarchie",t:"هيكل إداري مسطح",d:"Wir haben eine flache Hierarchie.",a:"هيكل إداري مسطح"},
+{w:"das Geschäftsjahr, -e",t:"السنة المالية",d:"Das Geschäftsjahr endet bald.",a:"السنة المالية"},
+{w:"das Gründungsdatum, -daten",t:"تاريخ التأسيس",d:"Das Gründungsdatum ist 1990.",a:"تاريخ التأسيس"},
+{w:"die Hierarchie, -n",t:"التسلسل الهرمي",d:"Die Hierarchie ist klar.",a:"التسلسل الهرمي"},
+{w:"im Anschluss an (+ Akk.)",t:"بعد / عقب",d:"Im Anschluss an das Meeting reden wir.",a:"بعد / عقب"},
+{w:"das Mitspracherecht, -e",t:"حق المشاركة",d:"Wir haben ein Mitspracherecht.",a:"حق المشاركة"},
+{w:"nachhaltig",t:"مستدام",d:"Wir arbeiten nachhaltig.",a:"مستدام"},
+{w:"etw. präsentieren",t:"يعرض",d:"Er präsentiert das Produkt.",a:"يعرض"},
+{w:"der Pressesprecher, -",t:"المتحدث الصحفي",d:"Der Pressesprecher spricht.",a:"المتحدث الصحفي"},
+{w:"die Pressesprecherin, -nen",t:"المتحدثة الصحفية",d:"Die Pressesprecherin spricht.",a:"المتحدثة الصحفية"},
+{w:"Produkte einführen",t:"يطرح منتجات",d:"Wir führen Produkte ein.",a:"يطرح منتجات"},
+{w:"die Produktionsstätte, -n",t:"موقع الإنتاج",d:"Die Produktionsstätte ist modern.",a:"موقع الإنتاج"},
+{w:"der Rundgang, -¨e",t:"جولة",d:"Der Rundgang ist interessant.",a:"جولة"},
+{w:"das Sortiment, -e",t:"التشكيلة",d:"Das Sortiment ist groß.",a:"التشكيلة"},
+{w:"der Standort, -e",t:"الموقع / المقر",d:"Der Standort ist Leipzig.",a:"الموقع / المقر"},
+{w:"die Terminbestätigung, -en",t:"تأكيد الموعد",d:"Die Terminbestätigung kommt per Mail.",a:"تأكيد الموعد"},
+{w:"etw. übernehmen",t:"يتولى / يتحمل",d:"Sie übernimmt die Aufgabe.",a:"يتولى / يتحمل"},
+{w:"der Umsatz, -¨e",t:"المبيعات / الإيرادات",d:"Der Umsatz steigt.",a:"المبيعات / الإيرادات"},
+{w:"die Unternehmensgeschichte, -n",t:"تاريخ الشركة",d:"Die Unternehmensgeschichte ist lang.",a:"تاريخ الشركة"},
+{w:"die Verkaufsfläche, -n",t:"مساحة البيع",d:"Die Verkaufsfläche ist groß.",a:"مساحة البيع"},
+{w:"das Verkaufsgespräch, -e",t:"محادثة البيع",d:"Das Verkaufsgespräch war gut.",a:"محادثة البيع"},
+{w:"das Zentrallager, -",t:"المستودع المركزي",d:"Das Zentrallager ist voll.",a:"المستودع المركزي"},
+{w:"das Zweigwerk, -e",t:"المصنع الفرعي",d:"Das Zweigwerk ist neu.",a:"المصنع الفرعي"},
+{w:"etw. anordnen",t:"يأمر / يرتب",d:"Der Chef ordnet das an.",a:"يأمر / يرتب"},
+{w:"das Controlling (Sg.)",t:"المراقبة المالية",d:"Das Controlling prüft die Zahlen.",a:"المراقبة المالية"},
+{w:"die Finanzabteilung, -en",t:"القسم المالي",d:"Die Finanzabteilung plant.",a:"القسم المالي"},
+{w:"die Fläche, -n",t:"المساحة",d:"Die Fläche ist groß.",a:"المساحة"},
+{w:"die Forschung und Entwicklung (Sg.)",t:"البحث والتطوير",d:"Forschung und Entwicklung ist wichtig.",a:"البحث والتطوير"},
+{w:"die Geschäftsleitung, -en",t:"إدارة الشركة",d:"Die Geschäftsleitung entscheidet.",a:"إدارة الشركة"},
+{w:"der Hauptbereich, -e",t:"المجال الرئيسي",d:"Der Hauptbereich ist Marketing.",a:"المجال الرئيسي"},
+{w:"die Haustechnik (Sg.)",t:"صيانة المبنى",d:"Die Haustechnik repariert.",a:"صيانة المبنى"},
+{w:"die Herstellung (Sg.)",t:"التصنيع",d:"Die Herstellung dauert lange.",a:"التصنيع"},
+{w:"die Hierarchieebene, -n",t:"المستوى الهرمي",d:"Die Hierarchieebene ist hoch.",a:"المستوى الهرمي"},
+{w:"das Lager, -",t:"المخزن",d:"Das Lager ist leer.",a:"المخزن"},
+{w:"etw. leiten",t:"يدير",d:"Sie leitet das Team.",a:"يدير"},
+{w:"das Marketing (Sg.)",t:"التسويق",d:"Das Marketing ist kreativ.",a:"التسويق"},
+{w:"die Marktuntersuchung, -en",t:"دراسة السوق",d:"Die Marktuntersuchung zeigt Ergebnisse.",a:"دراسة السوق"},
+{w:"die Mitarbeiterzahl, -en",t:"عدد الموظفين",d:"Die Mitarbeiterzahl steigt.",a:"عدد الموظفين"},
+{w:"die Öffentlichkeitsarbeit (Sg.)",t:"العلاقات العامة",d:"Die Öffentlichkeitsarbeit informiert.",a:"العلاقات العامة"},
+{w:"das Organigramm, -e",t:"الهيكل التنظيمي",d:"Das Organigramm zeigt die Struktur.",a:"الهيكل التنظيمي"},
+{w:"das Produktionsverfahren, -",t:"طريقة الإنتاج",d:"Das Produktionsverfahren ist neu.",a:"طريقة الإنتاج"},
+{w:"die Qualitätssicherung (Sg.)",t:"ضمان الجودة",d:"Die Qualitätssicherung prüft.",a:"ضمان الجودة"},
+{w:"die Rechtsabteilung, -en",t:"القسم القانوني",d:"Die Rechtsabteilung prüft den Vertrag.",a:"القسم القانوني"},
+{w:"die Spitze, -n",t:"القمة / القيادة",d:"Er ist an der Spitze.",a:"القمة / القيادة"},
+{w:"an der Spitze von (+ Dat.)",t:"على رأس",d:"Sie ist an der Spitze von der Firma.",a:"على رأس"},
+{w:"-untergeordnet",t:"تابع / أدنى",d:"Er ist untergeordnet.",a:"تابع / أدنى"},
+{w:"untergliedert",t:"مقسم إلى أقسام",d:"Die Firma ist untergliedert.",a:"مقسم إلى أقسام"},
+{w:"unterteilt",t:"مقسم",d:"Der Bereich ist unterteilt.",a:"مقسم"},
+{w:"die Verkaufsförderung (Sg.)",t:"ترويج المبيعات",d:"Die Verkaufsförderung läuft.",a:"ترويج المبيعات"},
+{w:"der Vertrieb (Sg.)",t:"التوزيع / المبيعات",d:"Der Vertrieb verkauft.",a:"التوزيع / المبيعات"},
+{w:"die Verwaltung, -en",t:"الإدارة",d:"Die Verwaltung organisiert.",a:"الإدارة"},
+{w:"etw. zuordnen zu (+ Dat.)",t:"يخصص لـ / ينسب إلى",d:"Wir ordnen das zu.",a:"يخصص لـ / ينسب إلى"},
+{w:"die Zuständigkeit, -en",t:"الاختصاص / المسؤولية",d:"Das ist meine Zuständigkeit.",a:"الاختصاص / المسؤولية"},
+{w:"die Anrede, -n",t:"صيغة المخاطبة",d:"Die Anrede ist wichtig.",a:"صيغة المخاطبة"},
+{w:"distanzlos",t:"بدون احترام المسافة",d:"Er ist distanzlos.",a:"بدون احترام المسافة"},
+{w:"das Du (Sg.)",t:"المخاطبة بـ du",d:"Das Du ist informell.",a:"المخاطبة بـ du"},
+{w:"sich duzen",t:"يتخاطب بـ du",d:"Wir duzen uns.",a:"يتخاطب بـ du"},
+{w:"der Kompromiss, -e",t:"الحل الوسط",d:"Wir finden einen Kompromiss.",a:"الحل الوسط"},
+{w:"einen Kompromiss finden",t:"يجد حلا وسطا",d:"Wir finden einen Kompromiss.",a:"يجد حلا وسطا"},
+{w:"etw./jdn. respektieren",t:"يحترم",d:"Wir respektieren das.",a:"يحترم"},
+{w:"das Sie (Sg.)",t:"المخاطبة بـ Sie",d:"Das Sie ist formell.",a:"المخاطبة بـ Sie"},
+{w:"sich siezen",t:"يتخاطب بـ Sie",d:"Wir siezen uns.",a:"يتخاطب بـ Sie"},
+{w:"jdm. das Du anbieten",t:"يعرض عليه المخاطبة بـ du",d:"Er bietet mir das Du an.",a:"يعرض عليه المخاطبة بـ du"}
+];
+function speak(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='de-DE';u.rate=0.9;speechSynthesis.speak(u);}
+function render(){
+ let q=document.getElementById('q').value.toLowerCase();
+ let f=q?DATA.filter(x=>x.w.toLowerCase().includes(q)||x.t.includes(q)):DATA;
+ document.getElementById('list').innerHTML=f.map((w,i)=>`
+  <div class="card">
+   <div class="num">#${i+1}</div>
+   <div class="word">${w.w}</div>
+   <div class="trans">${w.t}</div>
+   <div class="de">${w.d}</div>
+   <div class="ar">${w.a}</div>
+   <button class="btn" onclick="speak('${w.d.replace(/'/g,'')}')">🔊 اسمع الجملة</button>
+  </div>`).join('');
 }
+render();
 </script>
-
 </body>
 </html>
