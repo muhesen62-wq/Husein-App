@@ -123,25 +123,6 @@ const DATA=[
 {i:99,w:'das Sie (Sg.)',t:'المخاطبة بـ Sie',d:'Das Sie ist formell.',a:'المخاطبة بـ Sie رسمية.'},
 {i:100,w:'sich siezen',t:'يتخاطب بـ Sie',d:'In der Firma siezen wir uns.',a:'في الشركة نخاطب بعضنا بـ Sie.'},
 {i:101,w:'jdm. das Du anbieten',t:'يعرض du',d:'Der Chef bietet mir das Du an.',a:'المدير يعرض علي المخاطبة بـ du.'}
-];
-function speak(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='de-DE';u.rate=0.9;speechSynthesis.speak(u);}
-function render(){
- let q=document.getElementById('q').value.toLowerCase();
- let f=q?DATA.filter(x=>x.w.toLowerCase().includes(q)||x.t.includes(q)):DATA;
- document.getElementById('list').innerHTML=f.map((w,i)=>`
-  <div class="card">
-   <div class="num">#${w.i} / 101</div>
-   <div class="word">${w.w}</div>
-   <div class="trans">${w.t}</div>
-   <div class="de">🇩🇪 ${w.d}</div>
-   <div class="ar">🇸🇦 ${w.a}</div>
-   <button class="btn" onclick="speak('${w.d.replace(/'/g,'')}')">🔊 اسمع الجملة</button>
-  </div>`).join('');
-}
-render();
-</script>
-</body>
-</html>
 const DATA = [
 // --- Thema 1: Arbeitgeber ---
 {w:"der Arbeitgeber, -",t:"صاحب العمل / الشركة",d:"Mein Arbeitgeber ist eine große Firma in Leipzig.",a:"صاحب العمل لدي هو شركة كبيرة في لايبزيغ."},
