@@ -142,3 +142,61 @@ render();
 </script>
 </body>
 </html>
+const DATA = [
+// --- Thema 1: Arbeitgeber ---
+{w:"der Arbeitgeber, -",t:"صاحب العمل / الشركة",d:"Mein Arbeitgeber ist eine große Firma in Leipzig.",a:"صاحب العمل لدي هو شركة كبيرة في لايبزيغ."},
+{w:"die Branche, -n",t:"مجال العمل",d:"In welcher Branche arbeitest du?",a:"في أي مجال تعمل؟"},
+{w:"das Produkt, -e",t:"المنتج",d:"Das Produkt ist sehr beliebt bei Kunden.",a:"المنتج محبوب جدا عند الزبائن."},
+{w:"die Dienstleistung, -en",t:"الخدمة",d:"Die Firma bietet gute Dienstleistungen an.",a:"الشركة تقدم خدمات جيدة."},
+{w:"die Abteilung, -en",t:"القسم",d:"Ich arbeite in der Abteilung für Verkauf.",a:"أعمل في قسم المبيعات."},
+{w:"die Aufgabe, -n",t:"المهمة",d:"Meine Aufgabe ist die Betreuung von Kunden.",a:"مهمتي هي الاهتمام بالزبائن."},
+{w:"die Besonderheit, -en",t:"الشيء المميز",d:"Die Besonderheit der Firma ist das gute Team.",a:"الشيء المميز في الشركة هو الفريق الجيد."},
+
+// --- Thema 2: Arbeitsumfeld ---
+{w:"das Arbeitsumfeld (Sg.)",t:"بيئة العمل",d:"Ein gutes Arbeitsumfeld ist sehr wichtig.",a:"بيئة العمل الجيدة مهمة جدا."},
+{w:"die Jobsicherheit (Sg.)",t:"الأمان الوظيفي",d:"Jobsicherheit gibt mir ein gutes Gefühl.",a:"الأمان الوظيفي يعطيني شعور جيد."},
+{w:"der Lohn, ¨-e",t:"الراتب / الأجر",d:"Der Lohn kommt jeden Monat pünktlich.",a:"الراتب يأتي كل شهر في الوقت."},
+{w:"das Gehalt, ¨-er",t:"الراتب الشهري",d:"Das Gehalt in dieser Firma ist fair.",a:"الراتب في هذه الشركة عادل."},
+{w:"die Karrierechance, -n",t:"فرصة التطور",d:"Es gibt viele Karrierechancen in der Firma.",a:"هناك فرص كثيرة للتطور في الشركة."},
+{w:"die Kommunikation (Sg.)",t:"التواصل",d:"Gute Kommunikation im Team ist wichtig.",a:"التواصل الجيد في الفريق مهم."},
+{w:"die Berufserfahrung, -en",t:"الخبرة المهنية",d:"Ich habe viel Berufserfahrung in diesem Bereich.",a:"عندي خبرة كبيرة في هذا المجال."},
+
+// --- Thema 3: Berufswahl ---
+{w:"das Ereignis, -se",t:"الحدث",d:"Ein Ereignis hat meine Berufswahl verändert.",a:"حدث واحد غير اختياري للمهنة."},
+{w:"die Erfahrung, -en",t:"التجربة",d:"Diese Erfahrung war sehr wichtig für mich.",a:"كانت هذه التجربة مهمة جدا بالنسبة لي."},
+{w:"die Berufswahl (Sg.)",t:"اختيار المهنة",d:"Meine Berufswahl war nicht einfach.",a:"اختيار مهنتي لم يكن سهلا."},
+{w:"beeinflussen",t:"يؤثر على",d:"Meine Familie hat meine Berufswahl beeinflusst.",a:"عائلتي أثرت على اختياري للمهنة."},
+{w:"die Station, -en",t:"المرحلة",d:"Das Praktikum war eine wichtige Station.",a:"التدريب العملي كان مرحلة مهمة."},
+{w:"die Motivation (Sg.)",t:"الدافع",d:"Meine Motivation ist, Menschen zu helfen.",a:"دافعي هو مساعدة الناس."},
+{w:"die Folge, -n",t:"النتيجة",d:"Die Folge meiner Entscheidung ist positiv.",a:"نتيجة قراري إيجابية."},
+
+// --- Thema 4: Vorbild ---
+{w:"das Vorbild, -er",t:"القدوة",d:"Mein Vater ist mein berufliches Vorbild.",a:"أبي هو قدوتي في العمل."},
+{w:"das Umfeld (Sg.)",t:"المحيط / البيئة",d:"In meinem Umfeld gibt es viele gute Arbeiter.",a:"في محيطي يوجد عمال جيدون كثيرون."},
+{w:"die Beziehung, -en",t:"العلاقة",d:"Ich habe eine gute Beziehung zu meinem Chef.",a:"لدي علاقة جيدة مع مديري."},
+{w:"die Eigenschaft, -en",t:"الصفة",d:"Pünktlichkeit ist eine wichtige Eigenschaft.",a:"الالتزام بالوقت صفة مهمة."},
+{w:"der Einfluss (Sg.)",t:"التأثير",d:"Er hat großen Einfluss auf meine Karriere.",a:"له تأثير كبير على مسيرتي المهنية."},
+
+// --- Thema 5 & 6: Arbeitssuche / Bewerbung ---
+{w:"das Vorgehen (Sg.)",t:"الطريقة / الخطوات",d:"Das Vorgehen bei der Arbeitssuche ist klar.",a:"طريقة البحث عن العمل واضحة."},
+{w:"die Arbeitssuche (Sg.)",t:"البحث عن عمل",d:"Die Arbeitssuche dauert zwei Monate.",a:"البحث عن عمل يستغرق شهرين."},
+{w:"ein Angebot finden",t:"يجد عرض عمل",d:"Ich finde Angebote im Internet.",a:"أجد عروض العمل في الإنترنت."},
+{w:"der Erstkontakt, -e",t:"أول اتصال",d:"Der Erstkontakt war per E-Mail.",a:"أول اتصال كان عن طريق الإيميل."},
+{w:"die Bewerbungsunterlagen (Pl.)",t:"أوراق التقديم",d:"Meine Bewerbungsunterlagen sind komplett.",a:"أوراق تقديمي كاملة."},
+{w:"das Bewerbungsgespräch, -e",t:"مقابلة العمل",d:"Das Bewerbungsgespräch war nicht schwer.",a:"مقابلة العمل لم تكن صعبة."},
+{w:"die Vorbereitung, -en",t:"التحضير",d:"Gute Vorbereitung ist sehr wichtig.",a:"التحضير الجيد مهم جدا."},
+{w:"die Kleidung (Sg.)",t:"الملابس",d:"Die Kleidung für das Gespräch muss sauber sein.",a:"ملابس المقابلة يجب أن تكون نظيفة."},
+
+// --- Thema 7: Produkt ---
+{w:"das Merkmal, -e",t:"الميزة / المواصفة",d:"Ein Merkmal des Produkts ist die Qualität.",a:"إحدى مواصفات المنتج هي الجودة."},
+{w:"der Nutzen (Sg.)",t:"الفائدة",d:"Der Nutzen für Kunden ist sehr groß.",a:"الفائدة للزبائن كبيرة جدا."},
+{w:"der Vorteil, -e",t:"الإيجابية",d:"Ein Vorteil ist der günstige Preis.",a:"إحدى الإيجابيات هي السعر الرخيص."},
+{w:"der Nachteil, -e",t:"السلبية",d:"Ein Nachteil ist die kleine Größe.",a:"إحدى السلبيات هي الحجم الصغير."},
+{w:"der Erfolg, -e",t:"النجاح",d:"Das Produkt hat großen Erfolg.",a:"المنتج له نجاح كبير."},
+
+// --- Thema 8: Selbstständig ---
+{w:"sich selbstständig machen",t:"يفتح عمل خاص",d:"Ich möchte mich selbstständig machen.",a:"أريد أن أفتح عملي الخاص."},
+{w:"die Geschäftsidee, -n",t:"فكرة المشروع",d:"Meine Geschäftsidee ist ein kleiner Laden.",a:"فكرة مشروعي هي متجر صغير."},
+{w:"die Zielgruppe, -n",t:"الفئة المستهدفة",d:"Meine Zielgruppe sind junge Leute.",a:"الفئة المستهدفة لدي هم الشباب."},
+{w:"die Besonderheit, -en",t:"الميزة الخاصة",d:"Die Besonderheit meiner Idee ist der Service.",a:"الميزة الخاصة لفكرتي هي الخدمة."}
+];
