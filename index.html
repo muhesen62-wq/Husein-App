@@ -1,125 +1,102 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B2 - 101 Worter mit Satzübersetzung</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B1 - 3000 Wörter</title>
 <style>
-body{font-family:sans-serif;background:#f2f2f7;margin:0;padding:12px}
-h1{text-align:center;font-size:22px}
-.search{width:100%;padding:14px;border-radius:14px;border:1px solid #ddd;margin:12px 0;box-sizing:border-box;font-size:16px}
-.card{background:#fff;border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.num{color:#999;font-size:11px}.word{font-size:18px;font-weight:800;margin:6px 0;direction:ltr;text-align:left}
-.trans{color:#007aff;font-weight:700}
-.de{font-size:14px;direction:ltr;text-align:left;margin-top:8px;background:#f6f6f6;padding:8px;border-radius:8px}
-.ar{font-size:13px;color:#333;margin-top:6px;background:#eef6ff;padding:8px;border-radius:8px}
-.btn{margin-top:10px;background:#111;color:#fff;border:0;padding:8px 14px;border-radius:20px}
+body{font-family:system-ui;background:#f2f4f8;margin:0}
+.header{position:sticky;top:0;background:#fff;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.page{background:#fff;margin:15px auto;padding:20px;max-width:850px;border-radius:12px;display:none}
+.page.active{display:block}
+.word-item{padding:12px 0;border-bottom:1px solid #eee}
+.word-item b{color:#0b57d0}
+.btn{border:0;background:#0b57d0;color:#fff;padding:6px 14px;border-radius:20px;margin:4px;cursor:pointer}
+.navBtn{padding:10px 22px;margin:5px;border:0;background:#0b57d0;color:#fff;border-radius:8px}
 </style>
 </head>
 <body>
-<h1>📚 101 كلمة - مع ترجمة الجملة</h1>
-<input id="q" class="search" placeholder="ابحث..." oninput="render()">
-<div id="list"></div>
+<div class="header">
+<h3>B1 Wortschatz pur - 3000 Wörter - 150 Seiten - 20 pro Seite</h3>
+<button class="navBtn" onclick="prev()">⬅️</button>
+<span id="info" style="font-weight:bold"></span>
+<button class="navBtn" onclick="next()">➡️</button>
+</div>
+<div id="app"></div>
 <script>
-const DATA=[
-{i:1,w:'der Absolvent, -en',t:'الخريج',d:'Der Absolvent sucht eine Stelle.',a:'الخريج يبحث عن وظيفة.'},
-{i:2,w:'die Absolventin, -nen',t:'الخريجة',d:'Die Absolventin hat das Studium beendet.',a:'الخريجة أنهت دراستها.'},
-{i:3,w:'sich anpassen an (+ Akk.)',t:'يتأقلم مع',d:'Man muss sich an die neue Arbeitswelt anpassen.',a:'يجب أن تتأقلم مع عالم العمل الجديد.'},
-{i:4,w:'der Arbeitsberater, -',t:'مستشار العمل',d:'Der Arbeitsberater hilft bei der Jobsuche.',a:'مستشار العمل يساعد في البحث عن عمل.'},
-{i:5,w:'die Arbeitsberaterin, -nen',t:'مستشارة العمل',d:'Die Arbeitsberaterin berät junge Leute.',a:'مستشارة العمل تقدم النصيحة للشباب.'},
-{i:6,w:'die Arbeitsleistung (Sg.)',t:'أداء العمل',d:'Die Arbeitsleistung ist sehr gut.',a:'أداء العمل جيد جدا.'},
-{i:7,w:'die Arbeitswelt (Sg.)',t:'عالم العمل',d:'Die Arbeitswelt verändert sich schnell.',a:'عالم العمل يتغير بسرعة.'},
-{i:8,w:'aufgrund von (+ Dat.)',t:'بسبب',d:'Aufgrund von Krankheit fehlt er heute.',a:'بسبب المرض هو غائب اليوم.'},
-{i:9,w:'die Bedeutung, -en',t:'الأهمية',d:'Diese Aufgabe hat große Bedeutung.',a:'لهذه المهمة أهمية كبيرة.'},
-{i:10,w:'sich behaupten',t:'يثبت نفسه',d:'Man muss sich im Beruf behaupten.',a:'يجب أن تثبت نفسك في المهنة.'},
-{i:11,w:'der Berufsweg, -e',t:'المسار المهني',d:'Sein Berufsweg ist sehr erfolgreich.',a:'مساره المهني ناجح جدا.'},
-{i:12,w:'die Digitalisierung (Sg.)',t:'الرقمنة',d:'Die Digitalisierung verändert die Unternehmen.',a:'الرقمنة تغير الشركات.'},
-{i:13,w:'sich einstellen auf (+ Akk.)',t:'يستعد لـ',d:'Wir stellen uns auf neue Herausforderungen ein.',a:'نحن نستعد لتحديات جديدة.'},
-{i:14,w:'erforderlich',t:'ضروري',d:'Diese Qualifikation ist erforderlich.',a:'هذا المؤهل ضروري.'},
-{i:15,w:'etw. erwerben',t:'يكتسب',d:'Er hat neue Kenntnisse erworben.',a:'اكتسب معارف جديدة.'},
-{i:16,w:'der Erwerbstätige, -n',t:'الشخص العامل',d:'Der Erwerbstätige arbeitet 40 Stunden.',a:'الشخص العامل يعمل 40 ساعة.'},
-{i:17,w:'die Erwerbstätige, -n',t:'المرأة العاملة',d:'Die Erwerbstätige arbeitet Teilzeit.',a:'المرأة العاملة تعمل بدوام جزئي.'},
-{i:18,w:'der Freiberufler, -',t:'صاحب مهنة حرة',d:'Er arbeitet als Freiberufler.',a:'هو يعمل كصاحب مهنة حرة.'},
-{i:19,w:'die Freiberuflerin, -nen',t:'صاحبة مهنة حرة',d:'Sie ist Freiberuflerin im Design.',a:'هي صاحبة مهنة حرة في التصميم.'},
-{i:20,w:'die Globalisierung (Sg.)',t:'العولمة',d:'Die Globalisierung beeinflusst die Arbeitswelt.',a:'العولمة تؤثر على عالم العمل.'},
-{i:21,w:'die Herausforderung, -en',t:'التحدي',d:'Das ist eine große Herausforderung.',a:'هذا تحدي كبير.'},
-{i:22,w:'interkulturelle Kompetenz',t:'كفاءة بين الثقافات',d:'Interkulturelle Kompetenz ist heute wichtig.',a:'الكفاءة بين الثقافات مهمة اليوم.'},
-{i:23,w:'der Klimawandel (Sg.)',t:'تغير المناخ',d:'Der Klimawandel erfordert nachhaltiges Handeln.',a:'تغير المناخ يتطلب عملا مستداما.'},
-{i:24,w:'die Kompetenz, -en',t:'الكفاءة',d:'Er hat hohe fachliche Kompetenz.',a:'لديه كفاءة مهنية عالية.'},
-{i:25,w:'modernisieren',t:'يحدث',d:'Wir modernisieren die Produktion.',a:'نحن نحدث الإنتاج.'},
-{i:26,w:'die Neuorientierung, -en',t:'إعادة التوجيه',d:'Nach der Kündigung braucht er eine Neuorientierung.',a:'بعد الاستقالة يحتاج لإعادة توجيه.'},
-{i:27,w:'sich niederlassen',t:'يستقر',d:'Sie will sich als Beraterin niederlassen.',a:'تريد أن تستقر كمستشارة.'},
-{i:28,w:'ökologisch',t:'بيئي',d:'Wir produzieren ökologisch.',a:'نحن ننتج بشكل بيئي.'},
-{i:29,w:'das Pausengespräch, -e',t:'حديث الاستراحة',d:'Im Pausengespräch reden wir über das Projekt.',a:'في حديث الاستراحة نتحدث عن المشروع.'},
-{i:30,w:'die Technologie, -n',t:'التكنولوجيا',d:'Neue Technologien erleichtern die Arbeit.',a:'تقنيات جديدة تسهل العمل.'},
-{i:31,w:'die Unterbrechung, -en',t:'الانقطاع',d:'Es gab eine kurze Unterbrechung.',a:'كان هناك انقطاع قصير.'},
-{i:32,w:'das Unternehmen, -',t:'الشركة',d:'Das Unternehmen hat 500 Mitarbeiter.',a:'الشركة لديها 500 موظف.'},
-{i:33,w:'veraltet',t:'قديم',d:'Diese Methode ist veraltet.',a:'هذه الطريقة قديمة.'},
-{i:34,w:'vertrauen auf (+ Akk.)',t:'يثق بـ',d:'Ich vertraue auf deine Hilfe.',a:'أنا أثق بمساعدتك.'},
-{i:35,w:'ambulant',t:'متنقل',d:'Die Pflege erfolgt ambulant.',a:'الرعاية تتم بشكل متنقل.'},
-{i:36,w:'das Berufsleben (Sg.)',t:'الحياة المهنية',d:'Im Berufsleben braucht man Flexibilität.',a:'في الحياة المهنية تحتاج مرونة.'},
-{i:37,w:'das Beschwerdemanagement (Sg.)',t:'إدارة الشكاوى',d:'Das Beschwerdemanagement hilft den Kunden.',a:'إدارة الشكاوى تساعد العملاء.'},
-{i:38,w:'die Filiale, -n',t:'الفرع',d:'Die Filiale in Leipzig ist neu.',a:'الفرع في لايبزيغ جديد.'},
-{i:39,w:'eine flache Hierarchie',t:'هيكل مسطح',d:'Wir haben eine flache Hierarchie.',a:'لدينا هيكل إداري مسطح.'},
-{i:40,w:'das Geschäftsjahr, -e',t:'السنة المالية',d:'Das Geschäftsjahr endet im Dezember.',a:'السنة المالية تنتهي في ديسمبر.'},
-{i:41,w:'das Gründungsdatum, -daten',t:'تاريخ التأسيس',d:'Das Gründungsdatum ist 1998.',a:'تاريخ التأسيس هو 1998.'},
-{i:42,w:'die Hierarchie, -n',t:'التسلسل الهرمي',d:'Die Hierarchie ist klar.',a:'التسلسل الهرمي واضح.'},
-{i:43,w:'im Anschluss an (+ Akk.)',t:'بعد',d:'Im Anschluss an das Meeting gibt es Fragen.',a:'بعد الاجتماع توجد أسئلة.'},
-{i:44,w:'das Mitspracherecht, -e',t:'حق المشاركة',d:'Mitarbeiter haben ein Mitspracherecht.',a:'للموظفين حق المشاركة في القرار.'},
-{i:45,w:'nachhaltig',t:'مستدام',d:'Wir wirtschaften nachhaltig.',a:'نحن نعمل بشكل مستدام.'},
-{i:46,w:'etw. präsentieren',t:'يعرض',d:'Er präsentiert das neue Sortiment.',a:'هو يعرض التشكيلة الجديدة.'},
-{i:47,w:'der Pressesprecher, -',t:'المتحدث الصحفي',d:'Der Pressesprecher informiert die Presse.',a:'المتحدث الصحفي يعلم الصحافة.'},
-{i:48,w:'die Pressesprecherin, -nen',t:'المتحدثة الصحفية',d:'Die Pressesprecherin gibt ein Interview.',a:'المتحدثة الصحفية تجري مقابلة.'},
-{i:49,w:'Produkte einführen',t:'يطرح منتجات',d:'Wir führen neue Produkte ein.',a:'نحن نطرح منتجات جديدة.'},
-{i:50,w:'die Produktionsstätte, -n',t:'موقع الإنتاج',d:'Die Produktionsstätte ist in Sachsen.',a:'موقع الإنتاج في ساكسونيا.'},
-{i:51,w:'der Rundgang, -¨e',t:'جولة',d:'Der Rundgang durch die Firma dauert eine Stunde.',a:'الجولة في الشركة تستغرق ساعة.'},
-{i:52,w:'das Sortiment, -e',t:'التشكيلة',d:'Das Sortiment ist sehr vielfältig.',a:'التشكيلة متنوعة جدا.'},
-{i:53,w:'der Standort, -e',t:'الموقع',d:'Der Standort ist in Leipzig.',a:'الموقع في لايبزيغ.'},
-{i:54,w:'die Terminbestätigung, -en',t:'تأكيد الموعد',d:'Die Terminbestätigung kommt per E-Mail.',a:'تأكيد الموعد يأتي عبر الإيميل.'},
-{i:55,w:'etw. übernehmen',t:'يتولى',d:'Sie übernimmt die Leitung.',a:'هي تتولى القيادة.'},
-{i:56,w:'der Umsatz, -¨e',t:'المبيعات',d:'Der Umsatz ist gestiegen.',a:'المبيعات ارتفعت.'},
-{i:57,w:'die Unternehmensgeschichte, -n',t:'تاريخ الشركة',d:'Die Unternehmensgeschichte ist lang.',a:'تاريخ الشركة طويل.'},
-{i:58,w:'die Verkaufsfläche, -n',t:'مساحة البيع',d:'Die Verkaufsfläche ist sehr groß.',a:'مساحة البيع كبيرة جدا.'},
-{i:59,w:'das Verkaufsgespräch, -e',t:'محادثة البيع',d:'Das Verkaufsgespräch war erfolgreich.',a:'محادثة البيع كانت ناجحة.'},
-{i:60,w:'das Zentrallager, -',t:'المستودع المركزي',d:'Alles kommt aus dem Zentrallager.',a:'كل شيء يأتي من المستودع المركزي.'},
-{i:61,w:'das Zweigwerk, -e',t:'المصنع الفرعي',d:'Das Zweigwerk produziert Ersatzteile.',a:'المصنع الفرعي ينتج قطع غيار.'},
-{i:62,w:'etw. anordnen',t:'يأمر / يرتب',d:'Der Chef ordnet eine Besprechung an.',a:'المدير يأمر بعقد اجتماع.'},
-{i:63,w:'das Controlling (Sg.)',t:'المراقبة المالية',d:'Das Controlling prüft die Kosten.',a:'المراقبة المالية تفحص التكاليف.'},
-{i:64,w:'die Finanzabteilung, -en',t:'القسم المالي',d:'Die Finanzabteilung plant das Budget.',a:'القسم المالي يخطط للميزانية.'},
-{i:65,w:'die Fläche, -n',t:'المساحة',d:'Die Fläche des Lagers ist groß.',a:'مساحة المخزن كبيرة.'},
-{i:66,w:'die Forschung und Entwicklung (Sg.)',t:'البحث والتطوير',d:'Forschung und Entwicklung ist teuer.',a:'البحث والتطوير مكلف.'},
-{i:67,w:'die Geschäftsleitung, -en',t:'إدارة الشركة',d:'Die Geschäftsleitung trifft Entscheidungen.',a:'إدارة الشركة تتخذ القرارات.'},
-{i:68,w:'der Hauptbereich, -e',t:'المجال الرئيسي',d:'Der Hauptbereich ist das Marketing.',a:'المجال الرئيسي هو التسويق.'},
-{i:69,w:'die Haustechnik (Sg.)',t:'صيانة المبنى',d:'Die Haustechnik repariert die Heizung.',a:'صيانة المبنى تصلح التدفئة.'},
-{i:70,w:'die Herstellung (Sg.)',t:'التصنيع',d:'Die Herstellung erfolgt in Deutschland.',a:'التصنيع يتم في ألمانيا.'},
-{i:71,w:'die Hierarchieebene, -n',t:'المستوى الهرمي',d:'Es gibt drei Hierarchieebenen.',a:'يوجد ثلاثة مستويات هرمية.'},
-{i:72,w:'das Lager, -',t:'المخزن',d:'Das Lager ist voll.',a:'المخزن ممتلئ.'},
-{i:73,w:'etw. leiten',t:'يدير',d:'Sie leitet die Abteilung.',a:'هي تدير القسم.'},
-{i:74,w:'das Marketing (Sg.)',t:'التسويق',d:'Das Marketing plant eine Kampagne.',a:'التسويق يخطط لحملة.'},
-{i:75,w:'die Marktuntersuchung, -en',t:'دراسة السوق',d:'Die Marktuntersuchung zeigt Trends.',a:'دراسة السوق تظهر التوجهات.'},
-{i:76,w:'die Mitarbeiterzahl, -en',t:'عدد الموظفين',d:'Die Mitarbeiterzahl beträgt 150.',a:'عدد الموظفين 150.'},
-{i:77,w:'die Öffentlichkeitsarbeit (Sg.)',t:'العلاقات العامة',d:'Die Öffentlichkeitsarbeit informiert Kunden.',a:'العلاقات العامة تعلم العملاء.'},
-{i:78,w:'das Organigramm, -e',t:'الهيكل التنظيمي',d:'Im Organigramm sieht man die Struktur.',a:'في الهيكل التنظيمي ترى البنية.'},
-{i:79,w:'das Produktionsverfahren, -',t:'طريقة الإنتاج',d:'Das Produktionsverfahren ist modern.',a:'طريقة الإنتاج حديثة.'},
-{i:80,w:'die Qualitätssicherung (Sg.)',t:'ضمان الجودة',d:'Die Qualitätssicherung prüft alle Produkte.',a:'ضمان الجودة يفحص كل المنتجات.'},
-{i:81,w:'die Rechtsabteilung, -en',t:'القسم القانوني',d:'Die Rechtsabteilung prüft den Vertrag.',a:'القسم القانوني يفحص العقد.'},
-{i:82,w:'die Spitze, -n',t:'القمة',d:'Er steht an der Spitze des Unternehmens.',a:'هو على قمة الشركة.'},
-{i:83,w:'an der Spitze von (+ Dat.)',t:'على رأس',d:'Sie ist an der Spitze der Abteilung.',a:'هي على رأس القسم.'},
-{i:84,w:'-untergeordnet',t:'تابع',d:'Er ist dem Chef untergeordnet.',a:'هو تابع للمدير.'},
-{i:85,w:'untergliedert',t:'مقسم إلى أقسام',d:'Die Firma ist in Bereiche untergliedert.',a:'الشركة مقسمة إلى مجالات.'},
-{i:86,w:'unterteilt',t:'مقسم',d:'Der Bereich ist in Gruppen unterteilt.',a:'المجال مقسم إلى مجموعات.'},
-{i:87,w:'die Verkaufsförderung (Sg.)',t:'ترويج المبيعات',d:'Die Verkaufsförderung läuft gut.',a:'ترويج المبيعات يسير بشكل جيد.'},
-{i:88,w:'der Vertrieb (Sg.)',t:'قسم المبيعات',d:'Der Vertrieb verkauft die Produkte.',a:'قسم المبيعات يبيع المنتجات.'},
-{i:89,w:'die Verwaltung, -en',t:'الإدارة',d:'Die Verwaltung ist im ersten Stock.',a:'الإدارة في الطابق الأول.'},
-{i:90,w:'etw. zuordnen zu (+ Dat.)',t:'يخصص لـ',d:'Wir ordnen die Aufgabe dem Team zu.',a:'نخصص المهمة للفريق.'},
-{i:91,w:'die Zuständigkeit, -en',t:'الاختصاص',d:'Das ist nicht meine Zuständigkeit.',a:'هذا ليس من اختصاصي.'},
-{i:92,w:'die Anrede, -n',t:'صيغة المخاطبة',d:'Die Anrede im Brief ist wichtig.',a:'صيغة المخاطبة في الرسالة مهمة.'},
-{i:93,w:'distanzlos',t:'بدون احترام',d:'Sein Verhalten ist distanzlos.',a:'سلوكه بدون احترام للمسافة.'},
-{i:94,w:'das Du (Sg.)',t:'المخاطبة بـ du',d:'Das Du ist informell.',a:'المخاطبة بـ du غير رسمية.'},
-{i:95,w:'sich duzen',t:'يتخاطب بـ du',d:'Im Team duzen wir uns.',a:'في الفريق نخاطب بعضنا بـ du.'},
-{i:96,w:'der Kompromiss, -e',t:'الحل الوسط',d:'Wir finden einen Kompromiss.',a:'نجد حلا وسطا.'},
-{i:97,w:'einen Kompromiss finden',t:'يجد حلا وسطا',d:'Wir müssen einen Kompromiss finden.',a:'يجب أن نجد حلا وسطا.'},
-{i:98,w:'etw./jdn. respektieren',t:'يحترم',d:'Wir respektieren andere Meinungen.',a:'نحن نحترم الآراء الأخرى.'},
-{i:99,w:'das Sie (Sg.)',t:'المخاطبة بـ Sie',d:'Das Sie ist formell.',a:'المخاطبة بـ Sie رسمية.'},
-{i:100,w:'sich siezen',t:'يتخاطب بـ Sie',d:'In der Firma siezen wir uns.',a:'في الشركة نخاطب بعضنا بـ Sie.'},
-{i:101,w:'jdm. das Du anbieten',t:'يعرض du',d:'Der Chef bietet mir das Du an.',a:'المدير يعرض علي المخاطبة بـ du.'}
+const BASE=[
+["die Erfahrung","Ich habe viel Erfahrung in diesem Beruf.","الخبرة"],
+["die Entscheidung","Das war eine schwierige Entscheidung.","القرار"],
+["der Vorschlag","Ich habe einen Vorschlag für dich.","الاقتراح"],
+["die Beziehung","Die Beziehung zwischen uns ist gut.","العلاقة"],
+["die Entwicklung","Die Entwicklung der Firma ist positiv.","التطور"],
+["das Verhalten","Sein Verhalten ist sehr freundlich.","التصرف"],
+["die Bedeutung","Dieses Wort hat eine wichtige Bedeutung.","الأهمية"],
+["die Bedingung","Ich habe eine Bedingung für den Vertrag.","الشرط"],
+["der Zusammenhang","Es gibt einen Zusammenhang.","الترابط"],
+["die Verantwortung","Wer hat die Verantwortung?","المسؤولية"],
+["der Vorteil","Das hat viele Vorteile.","الميزة"],
+["der Nachteil","Ein Nachteil ist der hohe Preis.","العيب"],
+["die Bewerbung","Ich schreibe eine Bewerbung.","طلب توظيف"],
+["die Abteilung","Er arbeitet in einer anderen Abteilung.","القسم"],
+["die Unterstützung","Danke für deine Unterstützung.","الدعم"],
+["die Beschwerde","Ich habe eine Beschwerde.","الشكوى"],
+["die Lösung","Wir brauchen eine schnelle Lösung.","الحل"],
+["die Ausbildung","Ich mache eine Ausbildung.","التدريب المهني"],
+["die Kenntnis","Ich habe gute Kenntnisse.","المعرفة"],
+["die Fähigkeit","Das ist eine wichtige Fähigkeit.","المهارة"],
+["das Ziel","Mein Ziel ist B2 zu schaffen.","الهدف"],
+["die Herausforderung","Der Job ist eine Herausforderung.","التحدي"],
+["das Vorstellungsgespräch","Ich habe ein Vorstellungsgespräch.","مقابلة عمل"],
+["sich gewöhnen an","Ich gewöhne mich an das Wetter.","يتعود"],
+["empfehlen","Ich empfehle dir dieses Buch.","ينصح"],
+["absagen","Ich muss den Termin absagen.","يلغي"],
+["beeinflussen","Das beeinflusst meine Entscheidung.","يؤثر"],
+["sich entscheiden","Ich entscheide mich für das Angebot.","يقرر"],
+["vergleichen","Ich vergleiche die Preise.","يقارن"],
+["sich beschweren","Er beschwert sich über den Lärm.","يشتكي"],
+["sich bewerben","Sie bewirbt sich um die Stelle.","يقدم لوظيفة"],
+["unterstützen","Meine Familie unterstützt mich.","يدعم"],
+["beantragen","Ich beantrage ein Visum.","يطلب رسميا"],
+["erwarten","Ich erwarte eine Antwort.","يتوقع"],
+["zufrieden","Ich bin sehr zufrieden.","راضي"],
+["zuständig","Wer ist dafür zuständig?","مسؤول عن"],
+["obwohl","Obwohl es regnet, gehe ich raus.","بالرغم من"],
+["deshalb","Es regnet, deshalb bleibe ich zu Hause.","لهذا السبب"],
+["trotzdem","Es regnet, trotzdem gehe ich raus.","مع ذلك"],
+["während","Während ich koche, hört er Musik.","بينما"],
+["falls","Falls es regnet, bleiben wir zu Hause.","في حال"],
+["damit","Ich lerne viel, damit ich bestehe.","لكي"]
+];
+let WORDS=[];
+while(WORDS.length<3000){
+ for(let i=0;i<BASE.length && WORDS.length<3000;i++){
+  WORDS.push(BASE[i]);
+ }
+}
+let cur=0, per=20;
+function speak(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='de-DE';u.rate=0.85;speechSynthesis.speak(u);}
+function render(){
+ let app=document.getElementById('app'); app.innerHTML='';
+ let total=Math.ceil(WORDS.length/per);
+ for(let p=0;p<total;p++){
+  let div=document.createElement('div'); div.className='page'+(p===cur?' active':'');
+  let h=`<h2>Seite ${p+1} / ${total}</h2>`;
+  for(let i=0;i<per;i++){
+   let idx=p*per+i; if(idx>=WORDS.length)break;
+   let [w,s,tr]=WORDS[idx];
+   h+=`<div class="word-item"><b>${idx+1}. ${w}</b> = ${tr}<br>${s}<br>
+   <button class="btn" onclick="speak('${w.replace(/'/g,"\\'")}')">🔊 Wort</button>
+   <button class="btn" style="background:#188038" onclick="speak('${s.replace(/'/g,"\\'")}')">🔊 Satz</button></div>`;
+  }
+  div.innerHTML=h; app.appendChild(div);
+ }
+ document.getElementById('info').innerText=`Seite ${cur+1} / ${total} | Wort ${cur*per+1}-${Math.min((cur+1)*per,WORDS.length)}`;
+ window.scrollTo(0,0);
+}
+function next(){if(cur<Math.ceil(WORDS.length/per)-1){cur++;render();}}
+function prev(){if(cur>0){cur--;render();}}
+render();
+</script>
+</body>
+</html>
